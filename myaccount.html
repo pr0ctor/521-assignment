@@ -1,5 +1,5 @@
 <?php 
-require_once('db.inc');
+include('db.inc');
 include('head.inc');
 include('navbar.inc');
 ?>
@@ -7,14 +7,7 @@ include('navbar.inc');
   <!-- Sidebar -->
   <div id="wrapper">
 
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-          <ul class="sidebar-nav">
-              <li><a href="#">Users</a></li>
-              <li><a href="#">Items</a></li>
-              <li><a href="#">Orders</a></li>
-          </ul>
-      </div>
+      <?php include('adminsidebar.inc');?>
       <!-- /#sidebar-wrapper -->
 
       <!-- Page Content -->

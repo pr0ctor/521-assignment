@@ -1,7 +1,7 @@
 <?php 
-require_once('db.inc');
+include('db.inc');
 include('head.inc');
-include('foot.inc');
+include('navbar.inc');
 include('validate.inc');
 ?>
 
@@ -16,7 +16,7 @@ include('validate.inc');
 	if(validateCategory($category) && validateGender($gender))
 	{
 		
-		$stmt = $db->prepare($db,"SELECT * FROM Products WHERE category=? AND gender=?");
+		$stmt = $db->prepare("SELECT * FROM Products WHERE category=? AND gender=?");
 		
 		$stmt->bind_param("ss",$category,$gender);
 		$stmt->execute();
@@ -66,7 +66,7 @@ $rowstart=   "<div class='row'>
 		$imagerows = "<div class='container'>
               <div class='row'>
                 <div class='col-md-1 text-center'></div>
-                <div class='col-md-6'><h1>"No items to show"</h1></div>
+                <div class='col-md-6'><h1>No items to show</h1></div>
               </div>";
 		
 		print $imagerows;

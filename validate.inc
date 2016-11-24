@@ -1,10 +1,11 @@
 <?php
+include('db.inc');
 function validateCategory($category)
 {
 	if(!empty($category))
 	{
 		$catname = strtolower($category);
-		$stmt = mysqli_prepare($db, "SELECT category FROM Category WHERE category=?");
+		$stmt = $db->prepare("SELECT category FROM Category WHERE category='?'");
 		
 		$stmt->bind_param("s",$catname);
 		if(!$stmt->execute())

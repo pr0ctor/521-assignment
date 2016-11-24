@@ -1,1 +1,6 @@
 AddType application/x-httpd-php .html .htm
+
+<FilesMatch ".inc">
+	Order Allow,Deny
+	Deny from All
+</FilesMatch>

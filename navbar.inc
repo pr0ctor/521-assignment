@@ -39,21 +39,21 @@
 				          <li>
 					          <div class="row">
 							        <div class="col-md-12">
-								        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+								        <form class="form" role="form" method="post" action="myaccount.html" method="post" accept-charset="UTF-8">
 										      <div class="form-group">
-											      <label class="sr-only" for="exampleInputEmail2">Email Address</label>
-											      <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+											      <label class="sr-only" for="email-entry">Email Address</label>
+											      <input type="email" class="form-control" name="email" id="email-entry" placeholder="Email address" required>
 										      </div>
 										   <div class="form-group">
-											   <label class="sr-only" for="exampleInputPassword2">Password</label>
-											   <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+											   <label class="sr-only" for="password-entry">Password</label>
+											   <input type="password" class="form-control" name="password" id="password-entry" placeholder="Password" required>
 										   </div>
 										   <div class="form-group">
-											   <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+											   <button type="submit" class="btn btn-primary btn-block" value="login">Sign in</button>
 										   </div>
 								       </form>
 							       </div>
-							       <div class="bottom text-center">Don't have an account? <a href="Signup.html"><b>Sign up</b></a></div>
+							       <div class="bottom text-center">Don't have an account? <a href="signup.html"><b>Sign up</b></a></div>
 					         </div>
 				         </li>
 			         </ul>
