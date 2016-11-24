@@ -1,0 +1,35 @@
+<?php 
+require_once('db.inc');
+include('head.inc');include('navbar.inc');
+?>
+    <!-- Body -->
+    <div class="container">
+      <br><br>
+      <div class="row">
+        <div class="col-md-6 text-cener">
+          <img id="product" src="images/YYShirt.jpg" alt="None">
+        </div>
+        <div class="col-md-3">
+          <h1>Brand <br> Item Name</h1>
+          <h3>Price</h3>
+          <p>Item description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dolor lacus, aliquet commodo tortor in, bibendum semper ante. Nulla facilisi.</p>
+          <br>
+          <p>Select a size</p>
+          <form action="action_page.php">
+            <select name="Size">
+              <option value="volvo">Small</option>
+              <option value="saab">Medium</option>
+              <option value="fiat">Large</option>
+              <option value="audi">Extra Large</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Add to Cart">
+          </form>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+    <!-- Declare the Footer -->
+<?php include('foot.inc');
+?>

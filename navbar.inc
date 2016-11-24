@@ -1,6 +1,6 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <a href="TestStartPage.html" class="navbar-brand"><img style = "margin-top: -14px;" src="images/DMHeader.png" width="200px"></a>
+        <a href="index.html" class="navbar-brand"><img style = "margin-top: -14px;" src="images/DMHeader.png" width="200px"></a>
         <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -13,21 +13,21 @@
             <li class = "dropdown">
               <a href="default.asp" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="Items.html">Shirts</a></li>
-                  <li><a href="Items.html">Sweaters</a></li>
-                  <li><a href="Items.html">Jackets</a></li>
-                  <li><a href="Items.html">Pants</a></li>
-                  <li><a href="Items.html">Shoes</a></li>
+                  <li><a href="product.html?category=shirt&gender=M">Shirts</a></li>
+                  <li><a href="product.html?category=sweater&gender=M">Sweaters</a></li>
+                  <li><a href="product.html?category=jacket&gender=M">Jackets</a></li>
+                  <li><a href="product.html?category=pant&gender=M">Pants</a></li>
+                  <li><a href="product.html?category=shoe&gender=M">Shoes</a></li>
                 </ul>
             </li>
             <li class = "dropdown">
               <a href="default.asp" class="dropdown-toggle" data-toggle="dropdown">Women <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="Items.html">Tops</a></li>
-                  <li><a href="Items.html">Jackets</a></li>
-                  <li><a href="Items.html">Dresses</a></li>
-                  <li><a href="Items.html">Skirts</a></li>
-                  <li><a href="Items.html">Shoes</a></li>
+                  <li><a href="product.html?category=top&gender=F">Tops</a></li>
+                  <li><a href="product.html?category=jacket&gender=F">Jackets</a></li>
+                  <li><a href="product.html?category=dress&gender=F">Dresses</a></li>
+                  <li><a href="product.html?category=skirt&gender=F">Skirts</a></li>
+                  <li><a href="product.html?category=shoe&gender=F">Shoes</a></li>
                 </ul>
             </li>
             <li><a href="Brands.html">Brands</a></li>

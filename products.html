@@ -1,0 +1,87 @@
+<?php 
+require_once('db.inc');
+include('head.inc');
+include('foot.inc');
+include('validate.inc');
+?>
+
+<!-- Header -->
+<br><br>
+<br><br>
+
+<!-- Items -->
+<?php
+	$category = strtolower($_GET['category']);
+	$gender = strtoupper($_GET['gender']);
+	if(validateCategory($category) && validateGender($gender))
+	{
+		
+		$stmt = $db->prepare($db,"SELECT * FROM Products WHERE category=? AND gender=?");
+		
+		$stmt->bind_param("ss",$category,$gender);
+		$stmt->execute();
+		
+		$items = array();
+		
+		while($obj = $stmt->fetch_object()) $items[] = $obj;
+		
+$imagerows = "<div class='container'>
+              <div class='row'>
+                <div class='col-md-1 text-center'></div>
+                <div class='col-md-6'><h1>".ucfirst($category)."</h1></div>
+              </div>";
+$rowstart=   "<div class='row'>
+                <div class='col-md-1'></div>
+                <div class='col-md-6'><hr></hr></div>
+              </div>
+              <div class='row row-buffer'>";
+		print $imagerows;
+		print $rowstart;
+		$counter=0;
+		foreach($items as $item)
+		{
+			if($counter % 4 ===0)
+			{
+				print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
+				print "<div class='img'><a href='item.html?id=".$item->id."'><img id='item' src='".$item->image."' alt='".$item->name."'></a></div>";
+				print "<p class='imgDescription text-center'>".$item->brand."<br>".$item->name."</p></div>";
+				print "</div>";
+				print $rowstart;
+			}
+			else
+			{
+				print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
+				print "<div class='img'><a href='item.html?id=".$item->id."'><img id='item' src='".$item->image."' alt='".$item->name."'></a></div>";
+				print "<p class='imgDescription text-center'>".$item->brand."<br>".$item->name."</p></div>";
+
+			}
+		
+			$counter++;
+		}
+		print "</div>";
+
+	}
+?>
+
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-1 text-center"></div>
+    <div class="col-md-6"><h1>[Selected Category]</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6"><hr></hr></div>
+  </div>
+  <div class="row row-buffer">
+    <div class="col-md-3 col-xs-6 text-center imgWrap"> ===
+      <div class="img"><img id="item" src="images/placeholder.jpg" alt="None"></div>===
+      <p class="imgDescription text-center">Brand<br>Item Name</p></div>///
+    <div class="col-md-3 col-xs-6 text-center img imgWrap">
+      <img id="item" src="images/placeholder.jpg" alt="None"></div>
+    <div class="col-md-3 col-xs-6 text-center img imgWrap">
+      <img id="item" src="images/placeholder.jpg" alt="None"></div>
+    <div class="col-md-3 col-xs-6 text-center img imgWrap">
+      <img id="item" src="images/placeholder.jpg" alt="None"></div>
+  </div>
+</div>-->
+<?php include('foot.inc');?>
