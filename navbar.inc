@@ -13,21 +13,21 @@
             <li class = "dropdown">
               <a href="default.asp" class="dropdown-toggle" data-toggle="dropdown">Men <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="product.html?category=shirt&gender=M">Shirts</a></li>
-                  <li><a href="product.html?category=sweater&gender=M">Sweaters</a></li>
-                  <li><a href="product.html?category=jacket&gender=M">Jackets</a></li>
-                  <li><a href="product.html?category=pant&gender=M">Pants</a></li>
-                  <li><a href="product.html?category=shoe&gender=M">Shoes</a></li>
+                  <li><a href="products.html?category=shirt&gender=M">Shirts</a></li>
+                  <li><a href="products.html?category=sweater&gender=M">Sweaters</a></li>
+                  <li><a href="products.html?category=jacket&gender=M">Jackets</a></li>
+                  <li><a href="products.html?category=pant&gender=M">Pants</a></li>
+                  <li><a href="products.html?category=shoe&gender=M">Shoes</a></li>
                 </ul>
             </li>
             <li class = "dropdown">
               <a href="default.asp" class="dropdown-toggle" data-toggle="dropdown">Women <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="product.html?category=top&gender=F">Tops</a></li>
-                  <li><a href="product.html?category=jacket&gender=F">Jackets</a></li>
-                  <li><a href="product.html?category=dress&gender=F">Dresses</a></li>
-                  <li><a href="product.html?category=skirt&gender=F">Skirts</a></li>
-                  <li><a href="product.html?category=shoe&gender=F">Shoes</a></li>
+                  <li><a href="products.html?category=top&gender=F">Tops</a></li>
+                  <li><a href="products.html?category=jacket&gender=F">Jackets</a></li>
+                  <li><a href="products.html?category=dress&gender=F">Dresses</a></li>
+                  <li><a href="products.html?category=skirt&gender=F">Skirts</a></li>
+                  <li><a href="products.html?category=shoe&gender=F">Shoes</a></li>
                 </ul>
             </li>
             <li><a href="Brands.html">Brands</a></li>
