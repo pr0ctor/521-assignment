@@ -2,6 +2,7 @@
 include('db.inc');
 function validateCategory($category)
 {
+	global $db;
 	if(!empty($category))
 	{
 		$catname = strtolower($category);
