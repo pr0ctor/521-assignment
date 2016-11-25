@@ -6,6 +6,7 @@ drop table Shipment;
 drop table Category;
 drop table States;
 drop table Sizes;
+drop table Brands;
 
 create table Orders 
 (
@@ -27,6 +28,7 @@ create table Users
 	address varchar(100),
 	city varchar(100),
 	add_state char(2) foreign key references States(abbr),
+	zipcode int,
 	accesslevel int default 10,
 	primary key(U_ID)
 );
@@ -48,7 +50,8 @@ create table Products
 create table Inventory
 (
 	P_ID foreign key references Product(P_ID),
-	quantity int default 10
+	quantity int default 10,
+	primary key(P_ID)
 );
 
 create table Shipment
@@ -76,10 +79,18 @@ create table Sizes
 (
 	sizes varchar(20),
 	category varchar(50) foreign key references Category(category),
-	primary key(sizes,category)
+	gender char(1),
+	primary key(sizes,category,gender)
+);
+
+create table Brands
+(
+	name varchar(50),
+	brand varchar(50),
+	primary key(brand)
 );
 
 CREATE OR REPLACE LowInventoryView AS
-	SELECT Product.P_ID,name,category,brand,quantity
-	FROM Product p, Inventory i
-	WHERE i.quantity =< 5;
+	SELECT Products.P_ID,name,category,Brands.name,quantity
+	FROM Products p, Inventory i, Brands b
+	WHERE i.quantity =< 5 and b.brand = p.brand;

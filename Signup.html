@@ -7,24 +7,37 @@ include('navbar.inc');
     <br><br><br><br>
 
     <div class="wrapper">
-  <form class="form-signin">
+  <form class="form-signin" action="myaccount.html" method="post">
     <!-- Header -->
-    <h2 class="form-signin-heading">Signup</h2>
+    <h2 class="form-signin-heading" align="center">Sign Up</h2>
     <label><br></label>
     <!-- Username and Password fields -->
     <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
     <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
     <label></label>
     <!-- Address Info -->
-    <h2 class="form-signin-heading">Address Information</h2>
+    <h2 class="form-signin-heading" align="center">Address Information</h2>
     <label><br></label>
-    <input type="name" class="form-control" name="name" placeholder="Full Name" required="" autofocus="" />
+    <input type="name" class="form-control" name="fname" placeholder="First Name" required="" autofocus="" />
+    <input type="name" class="form-control" name="lname" placeholder="Last Name" required="" autofocus="" />
     <input type="address" class="form-control" name="address" placeholder="Address" required=""/>
     <input type="city" class="form-control" name="city" placeholder="City" required="" autofocus="" />
-    <input type="state" class="form-control" name="state" placeholder="State" required=""/>
+	<select class="form-control" name="state" placeholder="State" required="">
+	<?php 
+		$stmt = $db->query("SELECT * FROM States");
+		$list = array();
+		
+		while($obj = $stmt->fetch_object()) $list[] = $obj;
+		
+		foreach($list as $i)
+		{
+			print "<option value='".$i->abbr."'>".$i->abbr."</option>";
+		}
+	?>
+	</select>
     <input type="zipcode" class="form-control" name="zipcode" placeholder="Zipcode" required=""/>
     <label><br></label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Create Your Account</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="create-account">Create Your Account</button>
   </form>
 </div>
  <?php include('foot.inc');?>

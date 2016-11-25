@@ -1,0 +1,122 @@
+<?php
+include('db.inc');
+include('authenticate.inc');
+if($_SESSION['user']['access'] !== 0) header('Location: myaccount.html');
+include('adminhead.inc');
+include('navbar.inc');
+?>
+  <div id="wrapper">
+	<?php include('adminsidebar.inc');?>
+	<div id="page-content-wrapper">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-lg-12">
+				  
+					<p><table>
+					<tr>
+					<th><b>Email</b></th>
+					<th><b>First Name</b></th>
+					<th><b>Last Name</b></th>
+					<th><b>Address</b></th>
+					<th><b>City</b></th>
+					<th><b>State</b></th>
+					<th><b>Zipcode</b></th>
+					<th><b>Access Level</b></th>
+					<th></th>
+					<th></th>
+					<tr>
+					<?php
+			$stmt = $db->query("SELECT * FROM States");
+			$states = array();
+		
+			while($obj = $stmt->fetch_object()) $states[] = $obj;
+					
+			print "<form method='post'>";
+			print "<td><input type='text' name='email'></td>";
+			print "<td><input type='text' name='fname'></td>";
+			print "<td><input type='text' name='lname'></td>";
+			print "<td><input type='text' name='address'></td>";
+			print "<td><input type='text' name='city'></td>";
+			print "<td><select name='state' placeholder='State' required=''>";
+			foreach($states as $s)
+			{
+				print "<option value='".$s->abbr."'>".$s->abbr."</option>";
+			}
+			print "</select></td>";
+			print "<td><input type='text' name='zipcode'></td>";
+			print "<td><input type='text' name='accesslevel'></td>";
+			print "<td><input type='submit' name='update-user'></td>";
+			print "</form>";
+					?>
+					</tr>
+					</table></p>
+    <!-- Items -->
+    <p><table style="width:600px;">
+    <tr>
+      <th><b>U_ID</b></th>
+      <th><b>Email</b></th>
+	  <th><b>First Name</b></th>
+	  <th><b>Last Name</b></th>
+	  <th><b>Address</b></th>
+	  <th><b>City</b></th>
+	  <th><b>State</b></th>
+	  <th><b>Zipcode</b></th>
+	  <th><b>Access Level</b></th>
+	  <th></th>
+	  <th></th>
+    </tr>
+	<?php 
+	
+	$user = $db->query("SELECT * FROM Users");
+	$list = array();
+	while($obj = $user->fetch_object()) $list[]=$obj;
+	
+	$stmt = $db->query("SELECT * FROM States");
+	$states = array();
+		
+	while($obj = $stmt->fetch_object()) $states[] = $obj;
+	
+	foreach($list as $u)
+	{
+		print "<tr>";
+			print "<td>".$u->U_ID."</td>";
+			print "<td>".$u->email."</td>";
+			print "<td>".$u->fname."</td>";
+			print "<td>".$u->lname."</td>";
+			print "<td>".$u->address."</td>";
+			print "<td>".$u->city."</td>";
+			print "<td>".$u->state."</td>";
+			print "<td>".$u->zipcode."</td>";
+			print "<td>".$u->accesslevel."</td>";
+			print "<td><input type='submit' name='edit' value='Edit' onclick=\"$('#u-".$u->U_ID."').toggle();\"></td>";
+			print "<td><form method='post'><input type='hidden' name='user' value='".$u->U_ID."'><input type='submit' name='delete' value='Delete'></form></td>";
+		print "</tr>";
+		
+		print "<tr class='edit' id='u-".$u->U_ID."'>";
+			print "<form method='post'>";
+			print "<td><input type='hidden' name='U_ID' value='".$u->U_ID."'></td><td><input type='text' name='email'></td>";
+			print "<td><input type='text' name='fname'></td>";
+			print "<td><input type='text' name='lname'></td>";
+			print "<td><input type='text' name='address'></td>";
+			print "<td><input type='text' name='city'></td>";
+			print "<td><select name='state' placeholder='State' required=''>";
+			foreach($states as $s)
+			{
+				print "<option value='".$s->abbr."'>".$s->abbr."</option>";
+			}
+			print "</select></td>";
+			print "<td><input type='text' name='zipcode'></td>";
+			print "<td><input type='text' name='accesslevel'></td>";
+			print "<td><input type='submit' name='update-user'></td>";
+			print "</form>";
+		print "</tr>";
+	}
+	?>
+  </table></p>
+
+                    </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    </html>

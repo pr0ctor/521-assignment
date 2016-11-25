@@ -6,10 +6,12 @@ function validateCategory($category)
 	if(!empty($category))
 	{
 		$catname = strtolower($category);
-		$stmt = $db->prepare("SELECT category FROM Category WHERE category='?'");
+		$stmt = $db->prepare("SELECT count(*) AS num_cat FROM Category WHERE category='?'");
 		
-		$stmt->bind_param("s",$catname);
-		if(!$stmt->execute())
+		$stmt->bind_param('s',$catname);
+		$stmt->execute();
+		$stmt->bind_result($newcat)
+		if($newcat === 0)
 		{
 			return false;
 		}

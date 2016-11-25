@@ -5,27 +5,53 @@ include('head.inc');include('navbar.inc');
     <!-- Body -->
     <div class="container">
       <br><br>
-      <div class="row">
-        <div class="col-md-6 text-cener">
-          <img id="product" src="images/YYShirt.jpg" alt="None">
-        </div>
-        <div class="col-md-3">
-          <h1>Brand <br> Item Name</h1>
-          <h3>Price</h3>
-          <p>Item description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dolor lacus, aliquet commodo tortor in, bibendum semper ante. Nulla facilisi.</p>
-          <br>
-          <p>Select a size</p>
-          <form action="action_page.php">
-            <select name="Size">
-              <option value="volvo">Small</option>
-              <option value="saab">Medium</option>
-              <option value="fiat">Large</option>
-              <option value="audi">Extra Large</option>
-            </select>
-            <br><br>
-            <input type="submit" value="Add to Cart">
-          </form>
-        </div>
+      <div class="row"> 
+	  
+        <div class='col-md-6 text-cener'>
+		<?php
+		if(!empty($_POST['id'] && is_numeric($_POST['id']))
+		{
+			$stmt = $db->prepare("SELECT name,price,description,image,gender,category,brand FROM Products WHERE P_ID = ?");
+			
+			$stmt->bind_param('i',$_POST['id']);
+			$stmt->execute();
+			$item = array();
+			
+			while($obj = $stmt->fetch_object()) $item[] = $obj;
+			
+			$brand = $db->prepare("SELECT name FROM Brands WHERE brand = '?'");
+			$brand->bind_param('s',$item->brand);
+			$brand->execute();
+			$brandname = array();
+			while($obj = $brand->fetch_object()) $brandname[] = $obj;
+			
+			print "<img id='product' src='".$item->image."'alt='".$item->name"'>";
+			print "</div>";
+			print "<div class='col-md-3'>";
+			print "<h1>$".$brandname->name."<br>".$item->name.".00</h1>";
+			print "<h3>".substr($item->price,0,-2)."</h3>";
+			print "<p>Item description: ".$item->description."</p>";
+			print "<br>";
+			print "<p>Select a size</p>";
+			print "<form method='post' action='cart.html'>";
+			
+			$size = $db->prepare("SELECT sizes FROM Sizes WHERE category = '?' and gender = '?'");
+			$size->bind_param('ss',$item->category,$item->gender);
+			$size->execute();
+			$sizes = array();
+			while($obj = $size->fetch_object()) $sizes[]=$obj;
+			
+			print "<select name='size'>";
+			foreach($sizes as $s)
+			{
+              print "<option value='".$s->sizes."'>".$s->sizes."</option>";
+			}
+            print "</select>";
+            print "<br><br>"
+            print "<input type='submit' value='add'>";
+			print "</form>";
+			print "</div>";
+		?>
       </div>
     </div>
     <br><br>
