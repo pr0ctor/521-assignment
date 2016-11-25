@@ -13,9 +13,10 @@ create table Orders
 	O_ID int not null auto_increment,
 	U_ID int foreign key references Users(U_ID),
 	P_ID int foreign key References Product(P_ID),
+	quantity int,
 	purchaseDate timestamp,
 	processed boolean default false,
-	primary key(O_ID,U_ID,P_ID)
+	primary key(O_ID,P_ID)
 );
 
 create table Users
@@ -90,7 +91,7 @@ create table Brands
 	primary key(brand)
 );
 
-CREATE OR REPLACE LowInventoryView AS
-	SELECT Products.P_ID,name,category,Brands.name,quantity
+CREATE OR REPLACE VIEW LowInventoryView AS
+	SELECT Products.P_ID,Products.name,Products.category,Brands.name,quantity
 	FROM Products p, Inventory i, Brands b
 	WHERE i.quantity =< 5 and b.brand = p.brand;
