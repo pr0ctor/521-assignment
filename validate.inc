@@ -9,7 +9,7 @@ function validateCategory($category)
 		//$stmt = $db->prepare("SELECT count(*) AS num_cat FROM Category WHERE category=?");
 		$stmt = $db->query("SELECT category FROM Category");
 		//$stmt->bind_param('s',$catname);
-		$stmt->execute();
+		//$stmt->execute();
 		$catlist = array();
 		while($obj = $stmt->fetch_object()) $catlist[] = $obj;
 		

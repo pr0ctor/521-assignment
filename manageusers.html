@@ -12,7 +12,8 @@ include('navbar.inc');
               <div class="row">
                   <div class="col-lg-12">
 				  
-					<p><table>
+					<p><h2 class="form-signin-heading" align="center">Add User</h2>
+					<table>
 					<tr>
 					<th><b>Email</b></th>
 					<th><b>First Name</b></th>
@@ -24,6 +25,7 @@ include('navbar.inc');
 					<th><b>Access Level</b></th>
 					<th></th>
 					<th></th>
+					</tr>
 					<tr>
 					<?php
 			$stmt = $db->query("SELECT * FROM States");
@@ -51,7 +53,8 @@ include('navbar.inc');
 					</tr>
 					</table></p>
     <!-- Items -->
-    <p><table style="width:600px;">
+    <p><h2 class="form-signin-heading" align="center">Modify Users</h2>
+	<table style="width:600px;">
     <tr>
       <th><b>U_ID</b></th>
       <th><b>Email</b></th>
