@@ -6,20 +6,30 @@ function validateCategory($category)
 	if(!empty($category))
 	{
 		$catname = strtolower($category);
-		$stmt = $db->prepare("SELECT count(*) AS num_cat FROM Category WHERE category='?'");
-		
-		$stmt->bind_param('s',$catname);
+		//$stmt = $db->prepare("SELECT count(*) AS num_cat FROM Category WHERE category=?");
+		$stmt = $db->query("SELECT category FROM Category");
+		//$stmt->bind_param('s',$catname);
 		$stmt->execute();
 		$catlist = array();
 		while($obj = $stmt->fetch_object()) $catlist[] = $obj;
-		if($catlist->num_cat === 0)
+		
+		foreach($catlist as $c)
+		{
+			if(strcmp($c->category,$category)===0)
+			{
+				return true;
+			}
+		}
+		return false;
+		
+		/*if($catlist->num_cat === 0)
 		{
 			return false;
 		}
 		else
 		{
 			return true;
-		}
+		}*/
 	}
 	else
 	{

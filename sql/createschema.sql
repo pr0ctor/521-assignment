@@ -90,8 +90,3 @@ create table Brands
 	brand varchar(50),
 	primary key(brand)
 );
-
-CREATE OR REPLACE VIEW LowInventoryView AS
-	SELECT Products.P_ID,Products.name,Products.category,Brands.name,quantity
-	FROM Products p, Inventory i, Brands b
-	WHERE i.quantity =< 5 and b.brand = p.brand;
