@@ -40,7 +40,7 @@ include('navbar.inc');
 			print "<td><select name='state' placeholder='State' required=''>";
 			foreach($states as $s)
 			{
-				print "<option value='".$s->abbr."'>".$s->abbr."</option>";
+				print "<option value='".$s->stateabbr."'>".$s->stateabbr."</option>";
 			}
 			print "</select></td>";
 			print "<td><input type='text' name='zipcode'></td>";
@@ -85,7 +85,7 @@ include('navbar.inc');
 			print "<td>".$u->lname."</td>";
 			print "<td>".$u->address."</td>";
 			print "<td>".$u->city."</td>";
-			print "<td>".$u->state."</td>";
+			print "<td>".$u->stateabbr."</td>";
 			print "<td>".$u->zipcode."</td>";
 			print "<td>".$u->accesslevel."</td>";
 			print "<td><input type='submit' name='edit' value='Edit' onclick=\"$('#u-".$u->U_ID."').toggle();\"></td>";
@@ -102,7 +102,7 @@ include('navbar.inc');
 			print "<td><select name='state' placeholder='State' required=''>";
 			foreach($states as $s)
 			{
-				print "<option value='".$s->abbr."'>".$s->abbr."</option>";
+				print "<option value='".$s->stateabbr."'>".$s->stateabbr."</option>";
 			}
 			print "</select></td>";
 			print "<td><input type='text' name='zipcode'></td>";

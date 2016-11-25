@@ -11,7 +11,7 @@ drop table Brands;
 create table States
 (
 	stateabbr char(2),
-	primary key(abbr)
+	primary key(stateabbr)
 );
 
 create table Users
@@ -27,7 +27,7 @@ create table Users
 	zipcode int,
 	accesslevel int default 10,
 	primary key(U_ID),
-	foreign key(stateabbr) refereneces States(stateabbr)
+	foreign key(stateabbr) references States(stateabbr)
 );
 
 create table Products
@@ -53,9 +53,9 @@ create table Orders
 	quantity int,
 	purchaseDate timestamp,
 	processed boolean default false,
-	primary key(O_ID,P_ID),
 	foreign key(U_ID) references Users(U_ID),
 	foreign key(P_ID) references Products(P_ID)
+	primary key(O_ID,U_ID,P_ID),
 );
 
 
@@ -69,12 +69,12 @@ create table Inventory
 
 create table Shipment
 (
-	O_ID int,
-	U_ID int,
+	O_ID int not null,
+	U_ID int not null,
 	address varchar(100),
-	primary key(O_ID,U_ID),
 	foreign key(O_ID) references Orders(O_ID),
-	foreign key(U_ID) references Users(U_ID)
+	foreign key(U_ID) references Users(U_ID),
+	primary key(O_ID,U_ID)
 );
 
 create table Category
