@@ -18,13 +18,13 @@ create table Orders
 	processed boolean default false,
 	primary key(O_ID,P_ID),
 	foreign key(U_ID) references Users(U_ID),
-	foreign key(P_ID) references Product(P_ID)
+	foreign key(P_ID) references Products(P_ID)
 );
 
 create table Users
 (
 	U_ID int not null auto_increment,
-	email char(50) not null, --foreign key references Login(email) not null,
+	email char(50) not null,
 	password varchar(64) not null,
 	fname varchar(100),
 	lname varchar(100),
@@ -39,7 +39,7 @@ create table Users
 
 create table Products
 (
-	P_ID int not null auto_increment, --foreign key references Product(P_ID),
+	P_ID int not null auto_increment,
 	name varchar(100),
 	category varchar(50),
 	metadata varchar(200),
@@ -54,15 +54,16 @@ create table Products
 
 create table Inventory
 (
-	P_ID foreign key references Product(P_ID),
+	P_ID int,
 	quantity int default 10,
-	primary key(P_ID)
+	primary key(P_ID),
+	foreign key(P_ID) references Products(P_ID)
 );
 
 create table Shipment
 (
-	O_ID int foreign key references Orders(O_ID),
-	U_ID int key references Users(U_ID),
+	O_ID int,
+	U_ID int,
 	address varchar(100),
 	primary key(O_ID,U_ID),
 	foreign key(O_ID) references Orders(O_ID),
