@@ -54,8 +54,8 @@ create table Orders
 	purchaseDate timestamp,
 	processed boolean default false,
 	foreign key(U_ID) references Users(U_ID),
-	foreign key(P_ID) references Products(P_ID)
-	primary key(O_ID,P_ID),
+	foreign key(P_ID) references Products(P_ID),
+	primary key(O_ID,P_ID)
 );
 
 
