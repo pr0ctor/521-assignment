@@ -10,8 +10,9 @@ function validateCategory($category)
 		
 		$stmt->bind_param('s',$catname);
 		$stmt->execute();
-		$stmt->bind_result($newcat)
-		if($newcat === 0)
+		$catlist = array();
+		while($obj = $stmt->fetch_object()) $catlist[] = $obj;
+		if($catlist->num_cat === 0)
 		{
 			return false;
 		}
