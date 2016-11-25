@@ -55,7 +55,7 @@ create table Orders
 	processed boolean default false,
 	foreign key(U_ID) references Users(U_ID),
 	foreign key(P_ID) references Products(P_ID)
-	primary key(O_ID,U_ID,P_ID),
+	primary key(O_ID,P_ID),
 );
 
 
@@ -65,16 +65,6 @@ create table Inventory
 	quantity int default 10,
 	primary key(P_ID),
 	foreign key(P_ID) references Products(P_ID)
-);
-
-create table Shipment
-(
-	O_ID int not null,
-	U_ID int not null,
-	address varchar(100),
-	foreign key(O_ID) references Orders(O_ID),
-	foreign key(U_ID) references Users(U_ID),
-	primary key(O_ID,U_ID)
 );
 
 create table Category
