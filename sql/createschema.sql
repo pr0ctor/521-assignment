@@ -8,17 +8,10 @@ drop table States;
 drop table Sizes;
 drop table Brands;
 
-create table Orders 
+create table States
 (
-	O_ID int not null auto_increment,
-	U_ID int,
-	P_ID int,
-	quantity int,
-	purchaseDate timestamp,
-	processed boolean default false,
-	primary key(O_ID,P_ID),
-	foreign key(U_ID) references Users(U_ID),
-	foreign key(P_ID) references Products(P_ID)
+	stateabbr char(2),
+	primary key(abbr)
 );
 
 create table Users
@@ -30,11 +23,11 @@ create table Users
 	lname varchar(100),
 	address varchar(100),
 	city varchar(100),
-	add_state char(2),
+	stateabbr char(2),
 	zipcode int,
 	accesslevel int default 10,
 	primary key(U_ID),
-	foreign key(add_state) refereneces States(abbr)
+	foreign key(stateabbr) refereneces States(stateabbr)
 );
 
 create table Products
@@ -52,6 +45,20 @@ create table Products
 	foreign key(category) references Category(category)
 );
 
+create table Orders 
+(
+	O_ID int not null auto_increment,
+	U_ID int,
+	P_ID int,
+	quantity int,
+	purchaseDate timestamp,
+	processed boolean default false,
+	primary key(O_ID,P_ID),
+	foreign key(U_ID) references Users(U_ID),
+	foreign key(P_ID) references Products(P_ID)
+);
+
+
 create table Inventory
 (
 	P_ID int,
@@ -67,8 +74,7 @@ create table Shipment
 	address varchar(100),
 	primary key(O_ID,U_ID),
 	foreign key(O_ID) references Orders(O_ID),
-	foreign key(U_ID) references Users(U_ID),
-	foreign key(address) references Users(address)
+	foreign key(U_ID) references Users(U_ID)
 );
 
 create table Category
@@ -78,11 +84,6 @@ create table Category
 	primary key(category,gender)
 );
 
-create table States
-(
-	abbr char(2),
-	primary key(abbr)
-);
 
 create table Sizes
 (
