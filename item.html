@@ -17,29 +17,30 @@ include('head.inc');include('navbar.inc');
 			$stmt->execute();
 			$item = array();
 			$result = $stmt->get_result();
-			while($obj = $result->fetch_object()) $item[] = $obj;
-			
+			//while($obj = $result->fetch_assoc()) $item[] = $obj;
+			$item = $result->fetch_assoc();
 			/*$brand = $db->prepare("SELECT name FROM Brands WHERE brand = '?'");
 			$brand->bind_param('s',$item->brand);
 			$brand->execute();
 			$brandname = array();
 			while($obj = $brand->fetch_object()) $brandname[] = $obj;*/
-			
-			print "<img id='product' src='".$item->image."'alt='".$item->name"'>";
+			print "<img id='product' src='".$item['image']."'alt='".$item['name']."'>";
+			//print "<img id='product' src='".$item->image."'alt='".$item->name."'>";
 			print "</div>";
 			print "<div class='col-md-3'>";
-			print "<h1>".$item->brand."<br>".$item->name.".00</h1>";
-			print "<h3>$".substr($item->price,0,-2)."</h3>";
-			print "<p>Item description: ".$item->description."</p>";
+			print "<h1>".$item['brand']."<br>".$item['name']."</h1>";
+			print "<h3>$".substr($item['price'],0,-2).".00</h3>";
+			print "<p>Item description: ".$item['description']."</p>";
 			print "<br>";
 			print "<p>Select a size</p>";
 			print "<form method='post' action='cart.html'>";
 			
-			$size = $db->prepare("SELECT sizes FROM Sizes WHERE category = '?' and gender = '?'");
-			$size->bind_param('ss',$item->category,$item->gender);
+			$size = $db->prepare("SELECT sizes FROM Sizes WHERE category = ? and gender = ?");
+			$size->bind_param('ss',$item['category'],$item['gender']);
 			$size->execute();
 			$sizes = array();
-			while($obj = $size->fetch_object()) $sizes[]=$obj;
+			$result = $size->get_result();
+			while($obj = $result->fetch_object()) $sizes[]=$obj;
 			
 			print "<select name='size'>";
 			foreach($sizes as $s)
@@ -47,8 +48,8 @@ include('head.inc');include('navbar.inc');
               print "<option value='".$s->sizes."'>".$s->sizes."</option>";
 			}
             print "</select>";
-            print "<br><br>"
-            print "<input type='submit' value='add'>";
+            print "<br><br>";
+            print "<input type='submit' name='cart-add' value='Add to Cart'>";
 			print "</form>";
 			print "</div>";
 		}
