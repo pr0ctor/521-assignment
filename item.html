@@ -9,7 +9,7 @@ include('head.inc');include('navbar.inc');
 	  
         <div class='col-md-6 text-cener'>
 		<?php
-		if(!empty($_GET['id'] && is_numeric($_GET['id']))
+		if(!empty($_GET['id'] && is_numeric($_GET['id'])))
 		{
 			$stmt = $db->prepare("SELECT p.name as name,price,description,image,gender,category,b.name as brand FROM Products p, Brands b WHERE p.brand = b.brand AND P_ID = ?");
 			
