@@ -1,7 +1,7 @@
 <?php
 include('db.inc');
 include('authenticate.inc');
-if($_SESSION['user']['access'] !== 0) header('Location: myaccount.html');
+if($_SESSION['user']['access'] != 0) header('Location: myaccount.html');
 include('adminfunctions.inc');
 include('adminhead.inc');
 include('navbar.inc');
@@ -48,7 +48,7 @@ include('navbar.inc');
 			print "</select></td>";
 			print "<td><input type='text' name='zipcode'></td>";
 			print "<td><input type='text' name='accesslevel'></td>";
-			print "<td><input type='submit' name='add-user'></td>";
+			print "<td><input type='submit' name='add-user' value='Add User'></td>";
 			print "</form>";
 					?>
 					</tr>
@@ -73,12 +73,13 @@ include('navbar.inc');
 	
 	$user = $db->query("SELECT * FROM Users WHERE display = true");
 	$list = array();
-	while($obj = $user->fetch_object()) $list[]=$obj;
+	$result = $user->get_result();
+	while($obj = $result->fetch_object()) $list[]=$obj;
 	
 	$stmt = $db->query("SELECT * FROM States");
 	$states = array();
-		
-	while($obj = $stmt->fetch_object()) $states[] = $obj;
+	$result = $stmt->get_result();
+	while($obj = $result->fetch_object()) $states[] = $obj;
 	
 	foreach($list as $u)
 	{

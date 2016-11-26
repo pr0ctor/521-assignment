@@ -26,7 +26,7 @@ create table Users
 	stateabbr char(2),
 	zipcode int,
 	accesslevel int default 10,
-	display boolean default true,
+	disply boolean default true,
 	primary key(U_ID),
 	foreign key(stateabbr) references States(stateabbr)
 );

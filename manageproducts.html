@@ -1,0 +1,159 @@
+<?php 
+include('db.inc');
+include('authenticate.inc');
+if($_SESSION['user']['access'] > 2) header('Location: myaccount.html');
+include('adminfunctions.inc');
+include('adminhead.inc');
+include('navbar.inc');
+?>
+
+  <!-- Sidebar -->
+  <div id="wrapper">
+
+      <?php include('adminsidebar.inc');?>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-lg-12">
+				  <p><h2 class="form-signin-heading" align="center">Add User</h2>
+					<table style="width:600px;">
+					<tr>
+					  <th><b>P_ID</b></th>
+					  <th><b>Name</b></th>
+					  <th><b>Category</b></th>
+					  <th><b>Metadata</b></th>
+					  <th><b>Brand</b></th>
+					  <th><b>Image</b></th>
+					  <th><b>Price</b></th>
+					  <th><b>Gender</b></th>
+					  <th><b>Description</b></th>
+					  <th></th>
+					</tr>
+
+					<?php
+					
+						$brand = $db->query("SELECT * FROM Brands");
+						$brands = array();
+						$result = $stmt->get_result();
+						while($obj = $result->fetch_object()) $brands[] = $obj;
+						
+						$category = $db->query("SELECT * FROM Category");
+						$categorys = array();
+						$result = $stmt->get_result();
+						while($obj = $result->fetch_object()) $categorys[] = $obj;
+					
+					print "<tr>";
+						print "<form method='post'>";
+						print "<td><input type='text' name='name'></td>";
+						print "<td><select name='category' placeholder='Category' required=''>";
+						foreach($categorys as $cat)
+						{
+							print "<option value='".$cat->category."'>".$cat->category."</option>";
+						}
+						print "</select></td>";
+						print "<td><input type='text' name='metadata'></td>";
+						print "<td><select name='brand' placeholder='Brand' required=''>";
+						foreach($brands as $b)
+						{
+							print "<option value='".$b->brand."'>".$b->brand."</option>";
+						}
+						print "</select></td>";
+						print "<td><input type='text' name='image'></td>";
+						print "<td><input type='text' name='price'></td>";
+						print "<td><select name='gender' placeholder='Gender' required=''><option value='F'>F</option><option value='M'>M</option>";
+						print "</select></td>";
+						print "<td><input type='text' name='description'></td>";
+						print "<td><input type='submit' name='add-product' value='Add Product'></td>";
+						print "</form>";
+					print "</tr>";
+					?>
+					</tr>
+					</table></p>
+
+                      <p><h2 class="form-signin-heading" align="center">Modify Product Information</h2>
+	<table style="width:600px;">
+    <tr>
+      <th><b>P_ID</b></th>
+      <th><b>Name</b></th>
+	  <th><b>Category</b></th>
+	  <th><b>Metadata</b></th>
+	  <th><b>Brand</b></th>
+	  <th><b>Image</b></th>
+	  <th><b>Price</b></th>
+	  <th><b>Gender</b></th>
+	  <th><b>Description</b></th>
+	  <th></th>
+	  <th></th>
+    </tr>
+   <?php 
+	
+	$product = $db->query("SELECT * FROM Users WHERE display = true");
+	$list = array();
+	$result = $product->get_result();
+	while($obj = $user->fetch_object()) $list[]=$obj;
+	
+	$brand = $db->query("SELECT * FROM Brands");
+	$brands = array();
+	$result = $stmt->get_result();
+	while($obj = $result->fetch_object()) $brands[] = $obj;
+	
+	$category = $db->query("SELECT * FROM Category");
+	$categorys = array();
+	$result = $stmt->get_result();
+	while($obj = $result->fetch_object()) $categorys[] = $obj;
+	
+	foreach($list as $u)
+	{
+		print "<tr>";
+			print "<td>".$u->P_ID."</td>";
+			print "<td>".$u->name."</td>";
+			print "<td>".$u->category."</td>";
+			print "<td>".$u->metadata."</td>";
+			print "<td>".$u->brand."</td>";
+			print "<td>".$u->image."</td>";
+			print "<td>".$u->price."</td>";
+			print "<td>".$u->gender."</td>";
+			print "<td>".$u->description."</td>";
+			print "<td><input type='submit' name='edit' value='Edit' onclick=\"$('#p-".$u->P_ID."').toggle();\"></td>";
+			print "<td><form method='post'><input type='hidden' name='product' value='".$u->P_ID."'><input type='submit' name='delete-product' value='Delete'></form></td>";
+		print "</tr>";
+		
+		print "<tr class='edit' id='p-".$u->P_ID."'>";
+			print "<form method='post' action='manageproducts.html'>";
+			print "<td><input type='hidden' name='P_ID' value='".$u->P_ID."'></td><td><input type='text' name='email'></td>";
+			print "<td><input type='text' name='name'></td>";
+			print "<td><select name='category' placeholder='Category' required=''>";
+			foreach($categorys as $cat)
+			{
+				print "<option value='".$cat->category."'>".$cat->category."</option>";
+			}
+			print "</select></td>";
+			print "<td><input type='text' name='metadata'></td>";
+			print "<td><select name='brand' placeholder='Brand' required=''>";
+			foreach($brands as $b)
+			{
+				print "<option value='".$b->brand."'>".$b->brand."</option>";
+			}
+			print "</select></td>";
+			print "<td><input type='text' name='image'></td>";
+			print "<td><input type='text' name='price'></td>";
+			print "<td><select name='gender' placeholder='Gender' required=''><option value='F'>F</option><option value='M'>M</option>";
+			print "</select></td>";
+			print "<td><input type='text' name='description'></td>";
+			print "<td><input type='submit' name='update-product'></td>";
+			print "</form>";
+		print "</tr>";
+	}
+	?>
+  </table></p>
+  <br>
+  <input type="submit" value="Modify Information">
+
+  <br>
+  <form action="AddItem.html">
+    <input type="submit" value="Add Item" />
+  </form>
+    </html>

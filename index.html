@@ -21,12 +21,45 @@ include('navbar.inc');
         <div class="col-md-1"></div>
         <div class="col-md-6"><hr></hr></div>
       </div>
-      <div class="row row-buffer">
+	        <div class="row row-buffer">
+	  <?php
+		
+		$count = $db->query("SELECT count(P_ID) as count from Products");
+		$count->execute();
+		
+		$result = $count->get_result();
+		$num = array();
+		
+		$num[] = $result->fetch_object();
+		
+		$num1 = rand(1,($num->count +1));
+		$num2 = rand(1,($num->count +1));
+		$num3 = rand(1,($num->count +1));
+		$num4 = rand(1,($num->count +1));
+		
+		$getnum1 = $db->prepare("SELECT p.P_ID as id,p.name as name,b.name as brand,image FROM Products p,Brand b WHERE p.disply = true AND b.brand = p.brand and p.P_ID = ?");
+		$getnum1->bind_param('i',$num1);
+		
+		$getnum1->execute();
+		
+		$num1res = array();
+		while($obj = $result = $getnum1->get_result()) $num1res[] = $obj;
+		
+		print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
+		print "<div class='img'><a href='item.html?id=".$num1res->id."'><img id='item' src='".$num1res->image."' alt='".$num1res->name."'></a></div>";
+		print "<p class='imgDescription text-center'>".$num1res->brand."<br>".$num1res->name."</p></div>";
+		
+		
+		
+	  ?>
+	  </div>
+	  
+
+        <!--<div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>
         <div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>
         <div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>
-        <div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>
-        <div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>
-      </div>
+        <div class="col-md-3 col-xs-6 text-center img"><img src="images/placeholder.jpg" alt="None" width="200" height="300"></div>-->
+
     </div>
 
   <!-- Declare the Footer -->
