@@ -1,5 +1,5 @@
 <?php
-start_session(); // Doesn't hurt to call it twice (or more)
+session_start(); // Doesn't hurt to call it twice (or more)
 // I use $_REQUEST which checks both $_GET and $_POST
 if(!empty($_REQUEST['logout'])) unset($_SESSION['user']);
 // I'm only using $_POST for logging in – make sure you got your form names correct!

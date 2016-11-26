@@ -30,10 +30,50 @@
                   <li><a href="products.html?category=shoe&gender=F">Shoes</a></li>
                 </ul>
             </li>
-            <li><a href="Brands.html">Brands</a></li>
+            <li><a href="brands.html">Brands</a></li>
 
             <!-- Dropdown for the Login Bar -->
-            <li class="dropdown">
+            <?php 
+			$login="            <li class='dropdown'>
+              <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Login<span class='caret'></span></a>
+			          <ul id='login-dp' class='dropdown-menu'>
+				          <li>
+					          <div class='row'>
+							        <div class='col-md-12'>
+								        <form class='form' role='form' method='post' action='myaccount.html' method='post' accept-charset='UTF-8'>
+										      <div class='form-group'>
+											      <label class='sr-only' for='email-entry'>Email Address</label>
+											      <input type='email' class='form-control' name='email' id='email-entry' placeholder='Email address' required>
+										      </div>
+										   <div class='form-group'>
+											   <label class='sr-only' for='password-entry'>Password</label>
+											   <input type='password' class='form-control' name='password' id='password-entry' placeholder='Password' required>
+										   </div>
+										   <div class='form-group'>
+											   <button type='submit' class='btn btn-primary btn-block' value='login'>Sign in</button>
+										   </div>
+								       </form>
+							       </div>
+							       <div class='bottom text-center'>Don't have an account? <a href='signup.html'><b>Sign up</b></a></div>
+					         </div>
+				         </li>
+			         </ul>
+             </li>";
+			 
+			 
+			 if(isset($_SESSION['user']))
+			 {
+				print "<li><a href='myaccount.html'>".$_SESSION['user']['fname']." ".$_SESSION['user']['lname']."</a></li>";
+				print "<li><a href='myaccount.html?logout=true'>Logout</a></li>";
+			 }
+			 else
+			 {
+				print $login;
+			 }
+			
+			?>
+			
+			<!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
 			          <ul id="login-dp" class="dropdown-menu">
 				          <li>
@@ -57,7 +97,7 @@
 					         </div>
 				         </li>
 			         </ul>
-             </li>
+             </li>-->
 
              <!-- Dropdown for the Cart -->
              <li class="dropdown">

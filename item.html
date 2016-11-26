@@ -9,27 +9,27 @@ include('head.inc');include('navbar.inc');
 	  
         <div class='col-md-6 text-cener'>
 		<?php
-		if(!empty($_POST['id'] && is_numeric($_POST['id']))
+		if(!empty($_GET['id'] && is_numeric($_GET['id']))
 		{
-			$stmt = $db->prepare("SELECT name,price,description,image,gender,category,brand FROM Products WHERE P_ID = ?");
+			$stmt = $db->prepare("SELECT p.name as name,price,description,image,gender,category,b.name as brand FROM Products p, Brands b WHERE p.brand = b.brand AND P_ID = ?");
 			
-			$stmt->bind_param('i',$_POST['id']);
+			$stmt->bind_param('i',$_GET['id']);
 			$stmt->execute();
 			$item = array();
 			
 			while($obj = $stmt->fetch_object()) $item[] = $obj;
 			
-			$brand = $db->prepare("SELECT name FROM Brands WHERE brand = '?'");
+			/*$brand = $db->prepare("SELECT name FROM Brands WHERE brand = '?'");
 			$brand->bind_param('s',$item->brand);
 			$brand->execute();
 			$brandname = array();
-			while($obj = $brand->fetch_object()) $brandname[] = $obj;
+			while($obj = $brand->fetch_object()) $brandname[] = $obj;*/
 			
 			print "<img id='product' src='".$item->image."'alt='".$item->name"'>";
 			print "</div>";
 			print "<div class='col-md-3'>";
-			print "<h1>$".$brandname->name."<br>".$item->name.".00</h1>";
-			print "<h3>".substr($item->price,0,-2)."</h3>";
+			print "<h1>".$item->brand."<br>".$item->name.".00</h1>";
+			print "<h3>$".substr($item->price,0,-2)."</h3>";
 			print "<p>Item description: ".$item->description."</p>";
 			print "<br>";
 			print "<p>Select a size</p>";
@@ -51,6 +51,17 @@ include('head.inc');include('navbar.inc');
             print "<input type='submit' value='add'>";
 			print "</form>";
 			print "</div>";
+		}
+		else
+		{
+			$imagerows = "<div class='container'>
+				<div class='row'>
+                <div class='col-md-1 text-center'></div>
+                <div class='col-md-6'><h1 align='center'>No Item to Show</h1></div>
+				</div>";
+		
+			print $imagerows;
+		}
 		?>
       </div>
     </div>

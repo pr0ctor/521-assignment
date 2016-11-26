@@ -2,6 +2,7 @@
 include('db.inc');
 include('authenticate.inc');
 if($_SESSION['user']['access'] !== 0) header('Location: myaccount.html');
+include('adminfunctions.inc');
 include('adminhead.inc');
 include('navbar.inc');
 ?>
@@ -47,7 +48,7 @@ include('navbar.inc');
 			print "</select></td>";
 			print "<td><input type='text' name='zipcode'></td>";
 			print "<td><input type='text' name='accesslevel'></td>";
-			print "<td><input type='submit' name='update-user'></td>";
+			print "<td><input type='submit' name='add-user'></td>";
 			print "</form>";
 					?>
 					</tr>
@@ -70,7 +71,7 @@ include('navbar.inc');
     </tr>
 	<?php 
 	
-	$user = $db->query("SELECT * FROM Users");
+	$user = $db->query("SELECT * FROM Users WHERE display = true");
 	$list = array();
 	while($obj = $user->fetch_object()) $list[]=$obj;
 	
@@ -92,11 +93,11 @@ include('navbar.inc');
 			print "<td>".$u->zipcode."</td>";
 			print "<td>".$u->accesslevel."</td>";
 			print "<td><input type='submit' name='edit' value='Edit' onclick=\"$('#u-".$u->U_ID."').toggle();\"></td>";
-			print "<td><form method='post'><input type='hidden' name='user' value='".$u->U_ID."'><input type='submit' name='delete' value='Delete'></form></td>";
+			print "<td><form method='post'><input type='hidden' name='user' value='".$u->U_ID."'><input type='submit' name='delete-user' value='Delete'></form></td>";
 		print "</tr>";
 		
 		print "<tr class='edit' id='u-".$u->U_ID."'>";
-			print "<form method='post'>";
+			print "<form method='post' action='manageusers.html'>";
 			print "<td><input type='hidden' name='U_ID' value='".$u->U_ID."'></td><td><input type='text' name='email'></td>";
 			print "<td><input type='text' name='fname'></td>";
 			print "<td><input type='text' name='lname'></td>";
@@ -122,4 +123,5 @@ include('navbar.inc');
           </div>
       </div>
   </div>
+  </body>
     </html>

@@ -26,6 +26,7 @@ create table Users
 	stateabbr char(2),
 	zipcode int,
 	accesslevel int default 10,
+	display boolean default true,
 	primary key(U_ID),
 	foreign key(stateabbr) references States(stateabbr)
 );
@@ -41,6 +42,7 @@ create table Products
 	price int,
 	description text,
 	gender char(1),
+	display boolean default true,
 	primary key(P_ID),
 	foreign key(category) references Category(category)
 );

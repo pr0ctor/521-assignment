@@ -1,7 +1,8 @@
 <?php 
 include('db.inc');
 include('authenticate.inc');
-include('head.inc');
+include('adminfunctions.inc');
+include('adminhead.inc');
 include('navbar.inc');
 ?>
 
@@ -16,10 +17,67 @@ include('navbar.inc');
           <div class="container-fluid">
               <div class="row">
                   <div class="col-lg-12">
-                      <h1>Simple Sidebar</h1>
-                      <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                      <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+						<p><h2 class="form-signin-heading" align="center">Change Password</h2>
+						
+                      <p><h2 class="form-signin-heading" align="center">Modify User Information</h2>
+	<table style="width:600px;">
+    <tr>
+      <th><b>U_ID</b></th>
+      <th><b>Email</b></th>
+	  <th><b>First Name</b></th>
+	  <th><b>Last Name</b></th>
+	  <th><b>Address</b></th>
+	  <th><b>City</b></th>
+	  <th><b>State</b></th>
+	  <th><b>Zipcode</b></th>
+	  <th></th>
+    </tr>
+	<?php 
+	
+	$user = $db->prepare("SELECT * FROM Users WHERE U_ID = ?");
+	$user->bind_param('i',$_SESSION['user']['id']);
+	$user->execute();
+	$list = array();
+	while($obj = $user->fetch_object()) $list[]=$obj;
+	
+	$stmt = $db->query("SELECT * FROM States");
+	$states = array();
+		
+	while($obj = $stmt->fetch_object()) $states[] = $obj;
+	
+	foreach($list as $u)
+	{
+		print "<tr>";
+			print "<td>".$u->U_ID."</td>";
+			print "<td>".$u->email."</td>";
+			print "<td>".$u->fname."</td>";
+			print "<td>".$u->lname."</td>";
+			print "<td>".$u->address."</td>";
+			print "<td>".$u->city."</td>";
+			print "<td>".$u->stateabbr."</td>";
+			print "<td>".$u->zipcode."</td>";
+			print "<td><input type='submit' name='edit' value='Edit' onclick=\"$('#u-".$u->U_ID."').toggle();\"></td>";
+		print "</tr>";
+		
+		print "<tr class='edit' id='u-".$u->U_ID."'>";
+			print "<form method='post'>";
+			print "<td><input type='hidden' name='U_ID' value='".$u->U_ID."'></td><td><input type='text' name='email'></td>";
+			print "<td><input type='text' name='fname'></td>";
+			print "<td><input type='text' name='lname'></td>";
+			print "<td><input type='text' name='address'></td>";
+			print "<td><input type='text' name='city'></td>";
+			print "<td><select name='state' placeholder='State' required=''>";
+			foreach($states as $s)
+			{
+				print "<option value='".$s->stateabbr."'>".$s->stateabbr."</option>";
+			}
+			print "</select></td>";
+			print "<td><input type='text' name='zipcode'></td>";
+			print "<td><input type='submit' name='update-user'></td>";
+			print "</form>";
+		print "</tr>";
+	}?>
+	</table></p>
                   </div>
               </div>
           </div>
@@ -27,4 +85,5 @@ include('navbar.inc');
       <!-- /#page-content-wrapper -->
 
   </div>
+  </body>
 </html>
