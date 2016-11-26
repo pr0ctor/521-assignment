@@ -48,7 +48,8 @@ function validateBrand($brand)
 		//$stmt->bind_param('s',$catname);
 		//$stmt->execute();
 		$brandlist = array();
-		while($obj = $stmt->fetch_object()) $brandlist[] = $obj;
+		$result=$stmt->get_result();
+		while($obj = $result->fetch_object()) $brandlist[] = $obj;
 		
 		foreach($brandlist as $c)
 		{

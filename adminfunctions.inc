@@ -71,7 +71,7 @@ if(!empty($_POST['update-user']))
 		
 		if(!empty($_POST['accesslevel']) && is_numeric($_POST['accesslevel']))
 		{
-			if($_POST['accesslevel'] >==0 && $_POST['accesslevel'] <== 4 || $_POST['accesslevel'] === 10)
+			if($_POST['accesslevel'] >= 0 && $_POST['accesslevel'] <= 4 || $_POST['accesslevel'] === 10)
 			{
 				$access = stripHTML($_POST['accesslevel']);
 			
@@ -115,7 +115,7 @@ if(!empty($_POST['add-user']))
 
 								if(!empty($_POST['accesslevel']) && is_numeric($_POST['accesslevel']))
 								{
-									if($_POST['accesslevel'] >==0 && $_POST['accesslevel'] <== 4 || $_POST['accesslevel'] === 10)
+									if($_POST['accesslevel'] >==0 && $_POST['accesslevel'] <= 4 || $_POST['accesslevel'] == 10)
 									{
 										$access = stripHTML($_POST['accesslevel']);
 										$pass = "tromalsnad"."pass1234";

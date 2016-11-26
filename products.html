@@ -80,8 +80,8 @@ include('validate.inc');
 	{
 		$brand = strtolower($_GET['brand']);
 		
-		//if(validateBrand($brand))
-		//{
+		if(validateBrand($brand))
+		{
 			$stmt = $db->prepare("SELECT p.P_ID as id,p.name as name, b.name as brand,description,image FROM Products p, Brands b WHERE p.disply = true AND b.brand = p.brand AND p.brand=?");
 			
 			$stmt->bind_param("s",$brand);
@@ -94,7 +94,7 @@ include('validate.inc');
 				$imagerows = "<div class='container'>
 				  <div class='row'>
 					<div class='col-md-1 text-center'></div>
-					<div class='col-md-6'><h1>".ucfirst($brand)."</h1></div>
+					<div class='col-md-6'><h1>".$item->brand."</h1></div>
 				  </div>";
 		$rowstart=   "<div class='row'>
 					<div class='col-md-1'></div>
@@ -126,8 +126,8 @@ include('validate.inc');
 			}
 			print "</div>";
 			
-		//}
-		/*else
+		}
+		else
 		{
 			$imagerows = "<div class='container'>
 				  <div class='row'>
@@ -136,7 +136,7 @@ include('validate.inc');
 				  </div>";
 			
 			print $imagerows;
-		}*/
+		}
 		
 	}
 	else
