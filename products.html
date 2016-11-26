@@ -18,14 +18,14 @@ include('validate.inc');
 		if(validateCategory($category) && validateGender($gender))
 		{
 			
-			$stmt = $db->prepare("SELECT p.P_ID as id,p.name as name, b.name as brand,description,image FROM Products p, Brands b WHERE p.display = true AND b.brand = p.brand AND category=? AND gender=?");
+			$stmt = $db->prepare("SELECT p.P_ID as id,p.name as name, b.name as brand,description,image FROM Products p, Brands b WHERE p.disply = true AND b.brand = p.brand AND category=? AND gender=?");
 			
 			$stmt->bind_param("ss",$category,$gender);
 			$stmt->execute();
 			
 			$items = array();
-			
-			while($obj = $stmt->fetch_object()) $items[] = $obj;
+			$result = $stmt->get_result();
+			while($obj = $result->fetch_object()) $items[] = $obj;
 			
 			
 	$imagerows = "<div class='container'>
@@ -40,7 +40,7 @@ include('validate.inc');
 				  <div class='row row-buffer'>";
 			print $imagerows;
 			print $rowstart;
-			$counter=0;
+			$counter=1;
 			foreach($items as $item)
 			{
 				if($counter % 4 ===0)
@@ -171,5 +171,6 @@ include('validate.inc');
     <div class="col-md-3 col-xs-6 text-center img imgWrap">
       <img id="item" src="images/placeholder.jpg" alt="None"></div>
   </div>-->
+</div>
 </div>
 <?php include('foot.inc');?>

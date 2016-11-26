@@ -34,7 +34,7 @@ INSERT INTO Products(name,category,metadata,brand,price,description,gender,image
 
 
 INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('Tuxedo Jacket','jacket','[METADATA]','lanvin',229500,'[One button satin lapel tuxedo jacket.','M','products/LanvinMen/_12170432.jpg');
-INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('Twill Pants','pants','[METADATA]','lanvin',89500,'Flat front slim cut twill pants.','M','products/LanvinMen/_12406744.jpg');
+INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('Twill Pants','pant','[METADATA]','lanvin',89500,'Flat front slim cut twill pants.','M','products/LanvinMen/_12406744.jpg');
 INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('Turtle Neck','sweater','[METADATA]','lanvin',99500,'Cotton turtleneck ribbed sweater.','M','products/LanvinMen/_12459256.jpg');
 INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('Trench Coat','jacket','[METADATA]','lanvin',297500,'Brown wool 2 button classic trenchcoat.','M','products/LanvinMen/_12459959.jpg');
 INSERT INTO Products(name,category,metadata,brand,price,description,gender,image) values('High Top Climber','shoe','[METADATA]','lanvin',139500,'Black swede high top climber boot.','M','products/LanvinMen/_12836650.jpg');
