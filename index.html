@@ -41,7 +41,8 @@ include('navbar.inc');
 		$getnum1->execute();
 		
 		$num1res = array();
-		while($obj = $result = $getnum1->get_result()) $num1res[] = $obj;
+		$result = $getnum1->get_result();
+		while($obj = $result->fetch_object()) $num1res[] = $obj;
 		
 		print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
 		print "<div class='img'><a href='item.html?id=".$num1res->id."'><img id='item' src='".$num1res->image."' alt='".$num1res->name."'></a></div>";
