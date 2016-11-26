@@ -16,8 +16,8 @@ include('head.inc');include('navbar.inc');
 			$stmt->bind_param('i',$_GET['id']);
 			$stmt->execute();
 			$item = array();
-			
-			while($obj = $stmt->fetch_object()) $item[] = $obj;
+			$result = $stmt->get_result();
+			while($obj = $result->fetch_object()) $item[] = $obj;
 			
 			/*$brand = $db->prepare("SELECT name FROM Brands WHERE brand = '?'");
 			$brand->bind_param('s',$item->brand);
