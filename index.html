@@ -25,7 +25,6 @@ include('navbar.inc');
 	  <?php
 		
 		$count = $db->query("SELECT count(P_ID) as count from Products");
-		$count->execute();
 		
 		$result = $count->get_result();
 		$num = array();
