@@ -27,8 +27,8 @@ include('navbar.inc');
 		$count = $db->query("SELECT count(P_ID) as count from Products");
 		
 		$num = array();
-		
-		$num[] = $count->fetch_object();
+		$result = $count->get_result();
+		$num[] = $result->fetch_assoc();
 		
 		$num1 = rand(1,($num['count'] +1));
 		$num2 = rand(1,($num['count'] +1));
