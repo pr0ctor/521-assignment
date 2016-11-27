@@ -83,7 +83,9 @@ include('navbar.inc');
 			print "</form>";
 		print "</tr>";
 	}?>
-	</table></p>
+	</table></p> <?php
+  print_r($_SESSION);
+  ?>
                   </div>
               </div>
           </div>
@@ -91,8 +93,6 @@ include('navbar.inc');
       <!-- /#page-content-wrapper -->
 
   </div>
-  <?php
-  print_r($_SESSION);
-  ?>
+ 
   </body>
 </html>
