@@ -7,19 +7,30 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 {
 	$salt = "tromalsnad";
 	$stmt = $db->prepare("
-	select U_ID,fname,lname,accesslevel from Users
+	select U_ID,fname,lname,accesslevel as access from Users
 	where email=?
 	and password=password(?)
 	");
 	$pass = $salt.$_POST['password'];
 	$stmt->bind_param('ss',$_POST['email'],$pass);
 	$stmt->execute();
-	$stmt->bind_result($id,$fname,$lname,$access);
+	
+	$sesionvars = array();
+	$result = $stmt->get_result();
+	
+	if($sesionvars = $result->fetch_assoc())
+	{
+		$list = array("id"=>$sesionvars['P_ID'],"lname"=>$sesionvars['lname'],"fname"=>$sesionvars['fname'],"access"=>$sesionvars['access']);
+		$_SESSION['user']= $list;
+		
+	}
+	
+	/*$stmt->bind_result($id,$fname,$lname,$access);
 	if($stmt->fetch()) 
 	{
 		$array = array(id=>$id,fname=>$fname,lname=>$lname,access=>$access);
 		$_SESSION['user']=$array;
-	}
+	}*/
 }
 if(empty($_SESSION['user']))
 	header('Location: login.html'); // Redirect if not logged in
