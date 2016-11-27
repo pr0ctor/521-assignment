@@ -18,7 +18,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 	{
 		$sesionvars = array();
 		$result = $stmt->get_result();
-		$sesionvars = $result->fetch_assoc()
+		$sesionvars = $result->fetch_assoc();
 		$list = array("id"=>$sesionvars['id'],"lname"=>$sesionvars['lname'],"fname"=>$sesionvars['fname'],"access"=>$sesionvars['access']);
 		$_SESSION['user']= $list[];
 		
