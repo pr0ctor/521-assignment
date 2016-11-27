@@ -187,6 +187,7 @@ if(!empty($_POST['add-new-user']))
 				}
 			}
 		}
+		}
 	}
 }
 
