@@ -23,8 +23,25 @@ include('navbar.inc');
       </div>
 	        <div class="row row-buffer">
 	  <?php
+		  $random = $db->query("SELECT p.P_ID as id,p.name as name,image,b.name as brand FROM Products p,Brands b WHERE p.brand = b.brand ORDER BY rand() LIMIT 4");
+		  
+		  $item = array();
+		  while($obj = $random->fetch_object()) $item[] = $obj;
+		  
+		  
+		  foreach($item as $i)
+		  {
+			print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
+			print "<div class='img'><a href='item.html?id=".$i->id."'><img id='item' src='".$i->image."' alt='".$i->name."'></a></div>";
+			print "<p class='imgDescription text-center'>".$i->brand."<br>".$i->name."</p></div>";
 		
-		$count = $db->query("SELECT count(P_ID) as count from Products");
+		  
+		  
+		  }
+	  
+	  
+		
+		/*$count = $db->query("SELECT count(P_ID) as count from Products");
 		
 		$num = array();
 		//$result = $count->get_result();
@@ -48,7 +65,7 @@ include('navbar.inc');
 		print "<div class='img'><a href='item.html?id=".$num1res->id."'><img id='item' src='".$num1res->image."' alt='".$num1res->name."'></a></div>";
 		print "<p class='imgDescription text-center'>".$num1res->brand."<br>".$num1res->name."</p></div>";
 		
-		
+		*/
 		
 	  ?>
 	  </div>
