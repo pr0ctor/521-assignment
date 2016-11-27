@@ -25,7 +25,6 @@ include('navbar.inc');
 					<th><b>Zipcode</b></th>
 					<th><b>Access Level</b></th>
 					<th></th>
-					<th></th>
 					</tr>
 					<tr>
 					<?php
@@ -71,15 +70,15 @@ include('navbar.inc');
     </tr>
 	<?php 
 	
-	$user = $db->query("SELECT * FROM Users WHERE display = true");
+	$user = $db->query("SELECT * FROM Users WHERE disply = true");
 	$list = array();
-	$result = $user->get_result();
-	while($obj = $result->fetch_object()) $list[]=$obj;
+	//$result = $user->get_result();
+	while($obj = $user->fetch_object()) $list[]=$obj;
 	
-	$stmt = $db->query("SELECT * FROM States");
+	$state = $db->query("SELECT * FROM States");
 	$states = array();
-	$result = $stmt->get_result();
-	while($obj = $result->fetch_object()) $states[] = $obj;
+	//$result = $stmt->get_result();
+	while($obj = $state->fetch_object()) $states[] = $obj;
 	
 	foreach($list as $u)
 	{
@@ -98,7 +97,7 @@ include('navbar.inc');
 		print "</tr>";
 		
 		print "<tr class='edit' id='u-".$u->U_ID."'>";
-			print "<form method='post' action='manageusers.html'>";
+			print "<form method='post'>";
 			print "<td><input type='hidden' name='U_ID' value='".$u->U_ID."'></td><td><input type='text' name='email'></td>";
 			print "<td><input type='text' name='fname'></td>";
 			print "<td><input type='text' name='lname'></td>";

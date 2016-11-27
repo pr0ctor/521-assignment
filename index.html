@@ -34,39 +34,9 @@ include('navbar.inc');
 			print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
 			print "<div class='img'><a href='item.html?id=".$i->id."'><img id='item' src='".$i->image."' alt='".$i->name."'></a></div>";
 			print "<p class='imgDescription text-center'>".$i->brand."<br>".$i->name."</p></div>";
-		
-		  
-		  
+
 		  }
-	  
-	  
-		
-		/*$count = $db->query("SELECT count(P_ID) as count from Products");
-		
-		$num = array();
-		//$result = $count->get_result();
-		$num[] = $count->fetch_assoc();
-		
-		$num1 = rand(1,($num['count'] +1));
-		$num2 = rand(1,($num['count'] +1));
-		$num3 = rand(1,($num['count'] +1));
-		$num4 = rand(1,($num['count'] +1));
-		
-		$getnum1 = $db->prepare("SELECT p.P_ID as id,p.name as name,b.name as brand,image FROM Products p,Brand b WHERE p.disply = true AND b.brand = p.brand and p.P_ID = ?");
-		$getnum1->bind_param('i',$num1);
-		
-		$getnum1->execute();
-		
-		$num1res = array();
-		$result = $getnum1->get_result();
-		while($obj = $result->fetch_object()) $num1res[] = $obj;
-		
-		print "<div class='col-md-3 col-xs-6 text-center imgWrap'>";
-		print "<div class='img'><a href='item.html?id=".$num1res->id."'><img id='item' src='".$num1res->image."' alt='".$num1res->name."'></a></div>";
-		print "<p class='imgDescription text-center'>".$num1res->brand."<br>".$num1res->name."</p></div>";
-		
-		*/
-		
+
 	  ?>
 	  </div>
 	  

@@ -18,10 +18,9 @@ include('navbar.inc');
           <div class="container-fluid">
               <div class="row">
                   <div class="col-lg-12">
-				  <p><h2 class="form-signin-heading" align="center">Add User</h2>
+				  <p><h2 class="form-signin-heading" align="center">Add Product</h2>
 					<table style="width:600px;">
 					<tr>
-					  <th><b>P_ID</b></th>
 					  <th><b>Name</b></th>
 					  <th><b>Category</b></th>
 					  <th><b>Metadata</b></th>
@@ -37,13 +36,13 @@ include('navbar.inc');
 					
 						$brand = $db->query("SELECT * FROM Brands");
 						$brands = array();
-						$result = $stmt->get_result();
-						while($obj = $result->fetch_object()) $brands[] = $obj;
+						//$result = $stmt->get_result();
+						while($obj = $brand->fetch_object()) $brands[] = $obj;
 						
 						$category = $db->query("SELECT * FROM Category");
 						$categorys = array();
-						$result = $stmt->get_result();
-						while($obj = $result->fetch_object()) $categorys[] = $obj;
+						//$result = $stmt->get_result();
+						while($obj = $category->fetch_object()) $categorys[] = $obj;
 					
 					print "<tr>";
 						print "<form method='post'>";
@@ -65,12 +64,11 @@ include('navbar.inc');
 						print "<td><input type='text' name='price'></td>";
 						print "<td><select name='gender' placeholder='Gender' required=''><option value='F'>F</option><option value='M'>M</option>";
 						print "</select></td>";
-						print "<td><input type='text' name='description'></td>";
+						print "<td><textarea name='description' rows='4' cols='60'></textarea>";
 						print "<td><input type='submit' name='add-product' value='Add Product'></td>";
 						print "</form>";
 					print "</tr>";
 					?>
-					</tr>
 					</table></p>
 
                       <p><h2 class="form-signin-heading" align="center">Modify Product Information</h2>
@@ -90,19 +88,19 @@ include('navbar.inc');
     </tr>
    <?php 
 	
-	$product = $db->query("SELECT * FROM Users WHERE display = true");
+	$product = $db->query("SELECT * FROM Products WHERE disply = true");
 	$list = array();
-	$result = $product->get_result();
-	while($obj = $user->fetch_object()) $list[]=$obj;
+	//$result = $product->get_result();
+	while($obj = $product->fetch_object()) $list[]=$obj;
 	
 	$brand = $db->query("SELECT * FROM Brands");
 	$brands = array();
-	$result = $stmt->get_result();
+	//$result = $stmt->get_result();
 	while($obj = $result->fetch_object()) $brands[] = $obj;
 	
 	$category = $db->query("SELECT * FROM Category");
 	$categorys = array();
-	$result = $stmt->get_result();
+	//$result = $stmt->get_result();
 	while($obj = $result->fetch_object()) $categorys[] = $obj;
 	
 	foreach($list as $u)
@@ -142,7 +140,7 @@ include('navbar.inc');
 			print "<td><input type='text' name='price'></td>";
 			print "<td><select name='gender' placeholder='Gender' required=''><option value='F'>F</option><option value='M'>M</option>";
 			print "</select></td>";
-			print "<td><input type='text' name='description'></td>";
+			print "<td><textarea name='description' rows='4' cols='60'>".$u->description."</textarea></td>";
 			print "<td><input type='submit' name='update-product'></td>";
 			print "</form>";
 		print "</tr>";

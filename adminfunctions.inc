@@ -85,9 +85,9 @@ if(!empty($_POST['update-user']))
 //INSERT INTO Users(email,password,fname,lname,address,city,stateabbr,zipcode,) VALUES(?,?,?,?,?,?,?,?,?)
 if(!empty($_POST['add-user']))
 {
-	//if(!empty($_POST['user']))
-	//{
-		//$userid = stripHTML($_POST['user']);
+	if(!empty($_POST['email']))
+	{
+		$email = validateEmail($_POST['email']);
 		
 		if(!empty($_POST['fname']))
 		{
@@ -120,14 +120,14 @@ if(!empty($_POST['add-user']))
 										$access = stripHTML($_POST['accesslevel']);
 										$pass = "tromalsnad"."pass1234";
 										$stmt = $db->prepare("INSERT INTO Users(email,password,fname,lname,address,city,stateabbr,zipcode,accesslevel) VALUES(?,password(?),?,?,?,?,?,?,?)");
-										$stmt->bind_param('sssssssii'$email,$pass,$fname,$lname,$address,$city,$state,$zipcode,$access);
+										$stmt->bind_param('sssssssii',$email,$pass,$fname,$lname,$address,$city,$state,$zipcode,$access);
 										$stmt->execute();
 									}
 									else
 									{
 										$pass = "tromalsnad"."pass1234";
 										$stmt = $db->prepare("INSERT INTO Users(email,password,fname,lname,address,city,stateabbr,zipcode) VALUES(?,password(?),?,?,?,?,?,?)");
-										$stmt->bind_param('sssssssi'$email,$pass,$fname,$lname,$address,$city,$state,$zipcode);
+										$stmt->bind_param('sssssssi',$email,$pass,$fname,$lname,$address,$city,$state,$zipcode);
 										$stmt->execute();
 									}
 								}
@@ -137,7 +137,7 @@ if(!empty($_POST['add-user']))
 				}
 			}
 		}
-	//}
+	}
 }
 
 if(!empty($_POST['delete-user']))
