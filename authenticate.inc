@@ -13,13 +13,12 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 	");
 	$pass = $salt.$_POST['password'];
 	$stmt->bind_param('ss',$_POST['email'],$pass);
-	$stmt->execute();
-	
-	$sesionvars = array();
-	$result = $stmt->get_result();
-	
-	if($sesionvars = $result->fetch_assoc())
+
+	if($stmt->execute();)
 	{
+		$sesionvars = array();
+		$result = $stmt->get_result();
+		$sesionvars = $result->fetch_assoc()
 		$list = array("id"=>$sesionvars['P_ID'],"lname"=>$sesionvars['lname'],"fname"=>$sesionvars['fname'],"access"=>$sesionvars['access']);
 		$_SESSION['user']= $list;
 		
