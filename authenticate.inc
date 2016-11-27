@@ -3,13 +3,13 @@ session_start(); // Doesn't hurt to call it twice (or more)
 // I use $_REQUEST which checks both $_GET and $_POST
 if(!empty($_REQUEST['logout'])) unset($_SESSION['user']);
 // I'm only using $_POST for logging in – make sure you got your form names correct!
-if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-new-user']) 
+if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-new-user'])) 
 {
 	$salt = "tromalsnad";
 	$stmt = $db->prepare("
 	select U_ID,fname,lname,accesslevel from Users
-	where email='?'
-	and password=password('?')
+	where email=?
+	and password=password(?)
 	");
 	$pass = $salt.$_POST['password'];
 	$stmt->bind_param('ss',$_POST['email'],$pass);

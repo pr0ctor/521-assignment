@@ -146,7 +146,7 @@ if(!empty($_POST['add-new-user']))
 	{
 		$email = validateEmail($_POST['email']);
 		
-		if(!empty($_POST['password'])
+		if(!empty($_POST['password']))
 		{
 			$pass = stripHTML($_POST['password']);
 
