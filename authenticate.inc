@@ -8,8 +8,8 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 	$salt = "tromalsnad";
 	$stmt = $db->prepare("
 	select U_ID as id,fname,lname,accesslevel as access from Users
-	where email=?
-	and password=password(?)
+	where email='?'
+	and password=password('?')
 	");
 	$pass = $salt.$_POST['password'];
 	$stmt->bind_param('ss',$_POST['email'],$pass);
@@ -20,7 +20,12 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 		$result = $stmt->get_result();
 		$sesionvars = $result->fetch_assoc();
 		$list = array("id"=>$sesionvars['id'],"lname"=>$sesionvars['lname'],"fname"=>$sesionvars['fname'],"access"=>$sesionvars['access']);
-		$_SESSION['user']= $list[];
+		$_SESSION['user']= $list;
+		
+	}
+	else
+	{
+		unset($_SESSION['user']);
 		
 	}
 	
