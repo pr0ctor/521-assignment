@@ -7,7 +7,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 {
 	$salt = "tromalsnad";
 	$stmt = $db->prepare("
-	select U_ID,fname,lname,accesslevel as access from Users
+	select U_ID as id,fname,lname,accesslevel as access from Users
 	where email=?
 	and password=password(?)
 	");
@@ -18,9 +18,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 	{
 		$sesionvars = array();
 		$result = $stmt->get_result();
-		$sesionvars = $result->fetch_object();
-		$list = array("id"=>$sesionvars->U_ID,"lname"=>$sesionvars->lname,"fname"=>$sesionvars->fname,"access"=>$sesionvars->access);
-		$_SESSION['user']= $list;
+		$sesionvars = $result->fetch_assoc()
+		$list = array("id"=>$sesionvars['id'],"lname"=>$sesionvars['lname'],"fname"=>$sesionvars['fname'],"access"=>$sesionvars['access']);
+		$_SESSION['user']= $list[];
 		
 	}
 	
