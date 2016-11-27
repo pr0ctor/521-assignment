@@ -60,6 +60,17 @@ create table Orders
 	primary key(O_ID,P_ID)
 );
 
+create table Orders
+(
+	U_ID int,
+	P_ID int,
+	quantity int,
+	purchaseDate timestamp,
+	foreign key(U_ID) references Users(U_ID),
+	foreign key(P_ID) references Products(P_ID),
+	primary key(U_ID,P_ID,purchaseDate)
+);
+
 
 create table Inventory
 (

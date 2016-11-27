@@ -11,7 +11,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']))
 	where email='?'
 	and password=password('?')
 	");
-	$stmt->bind_param('ss',$_POST['user'],$salt.$_POST['pass']);
+	$stmt->bind_param('ss',$_POST['email'],$salt.$_POST['password']);
 	$stmt->execute();
 	$stmt->bind_result($id,$fname,$lname,$access);
 	if($stmt->fetch()) 
