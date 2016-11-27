@@ -88,7 +88,7 @@ if(!empty($_POST['add-user']))
 	if(!empty($_POST['email']))
 	{
 		$email = validateEmail($_POST['email']);
-		
+
 		if(!empty($_POST['fname']))
 		{
 			$fname = stripHTML($_POST['fname']);
@@ -113,7 +113,7 @@ if(!empty($_POST['add-user']))
 							{
 								$zipcode = stripHTML($_POST['zipcode']);
 
-								if(!empty($_POST['accesslevel']) && is_numeric($_POST['accesslevel']))
+								if(!empty($_POST['accesslevel']))
 								{
 									if($_POST['accesslevel'] >= 0 && $_POST['accesslevel'] <= 4 || $_POST['accesslevel'] == 10)
 									{
@@ -131,6 +131,56 @@ if(!empty($_POST['add-user']))
 										$stmt->execute();
 									}
 								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+if(!empty($_POST['add-new-user']))
+{
+	if(!empty($_POST['email']))
+	{
+		$email = validateEmail($_POST['email']);
+		
+		if(!empty($_POST['password'])
+		{
+			$pass = stripHTML($_POST['password']);
+
+		if(!empty($_POST['fname']))
+		{
+			$fname = stripHTML($_POST['fname']);
+			
+			if(!empty($_POST['lname']))
+			{
+				$lname = stripHTML($_POST['lname']);
+				
+				if(!empty($_POST['address']))
+				{
+					$address = stripHTML($_POST['address']);
+			
+					if(!empty($_POST['city']))
+					{
+						$city = stripHTML($_POST['city']);
+			
+						if(!empty($_POST['state']))
+						{
+							$state = stripHTML($_POST['state']);
+			
+							if(!empty($_POST['zipcode']) && is_numeric($_POST['zipcode']))
+							{
+								$zipcode = stripHTML($_POST['zipcode']);
+
+
+								//$pass = "tromalsnad"."pass1234";
+								$stmt = $db->prepare("INSERT INTO Users(email,password,fname,lname,address,city,stateabbr,zipcode) VALUES(?,password(?),?,?,?,?,?,?)");
+								$stmt->bind_param('sssssssi',$email,$pass,$fname,$lname,$address,$city,$state,$zipcode);
+								$stmt->execute();
+							
+						
 							}
 						}
 					}
