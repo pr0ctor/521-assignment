@@ -9,7 +9,7 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && empty($_POST['add-ne
 	$stmt = $db->prepare("
 	select U_ID as id,fname,lname,accesslevel as access from Users
 	where email='?'
-	and password=password('?')
+	and password=password(?)
 	");
 	$pass = $salt.$_POST['password'];
 	$stmt->bind_param('ss',$_POST['email'],$pass);
